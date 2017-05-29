@@ -182,24 +182,36 @@ var csssPrites = function() {
 gulp.task('cdn', function(){
   return gulp
       .src([config.dev.html, '!*.tpl'], { base: config.rootDev })
-      .pipe(cdnizer({
-        defaultCDNBase: "//my.cdn.host/base",
-        allowRev: true,
-        allowMin: true,
-        files: [
-          'assets/*/*css',
-  				'assets/*/*js'
-  			]
-      }))
-      .pipe(gulp.dest(config.build.html))
+      .pipe(cdnizer(
+        {
+          defaultCDNBase: "//my.cdn.host/base",
+          allowRev: true,
+          allowMin: true,
+          files: [
+            'assets/*/*css',
+            'assets/*/*js',
+            'assets/*/*.{gif,png,jpg,jpeg}',
+            {
+              file: 'assets/lib/bootstrap/dist/css/bootstrap.min.css',
+              package: "bootstrap",
+              cdn: '//cdn.bootcss.com/bootstrap/${ version }/css/${ filenameMin }'
+            },
+            {
+              file: 'assets/lib/jquery/dist/jquery.min.js',
+              package: "jquery",
+              cdn: '//cdn.bootcss.com/jquery/${ version }/${ filenameMin }'
+            }
+          ]
+        }))
+      .pipe(gulp.dest('src/'))
 })
 
 /* html 打包*/
 gulp.task('htmlmin', function() {
     var optionsSet = {
-        removeComments: true, // 清除HTML注释
-        collapseWhitespace: true, // 压缩HTML
-        collapseBooleanAttributes: true, // 省略布尔属性的值 <input checked="true"/> ==> <input />
+        removeComments: false, // 清除HTML注释
+        collapseWhitespace: false, // 压缩HTML
+        collapseBooleanAttributes: false, // 省略布尔属性的值 <input checked="true"/> ==> <input />
         removeEmptyAttributes: false, // 删除所有空格作属性值 <input id="" /> ==> <input />
         removeScriptTypeAttributes: false, // 删除<script>的type="text/javascript"
         removeStyleLinkTypeAttributes: false, // 删除<style>和<link>的type="text/css"
