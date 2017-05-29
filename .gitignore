@@ -30,7 +30,7 @@ $RECYCLE.BIN/
 .AppleDouble
 .LSOverride
 
-# Thumbnails		
+# Thumbnails
 ._*
 
 # Files that might appear in the root of a volume
@@ -55,3 +55,6 @@ build
 
 tree.txt
 USER.MD
+
+vendor
+src/assets/lib
