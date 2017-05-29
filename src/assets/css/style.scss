@@ -1,0 +1,261 @@
+/*重置样式*/
+@import "style/var";
+
+li{
+  list-style-type: none;
+}
+ul{
+  margin: 0;
+  padding: 0;
+}
+a {
+  cursor: pointer;
+  outline: none;
+  color: #555;
+  &:hover{
+    text-decoration: none;
+  }
+}
+
+.t-header{
+  @include border-bottom;
+  background: #f9f7f4;
+  padding: 5px 0;
+  .top{
+    overflow: hidden;
+  }
+  a{
+    display: block;
+    float: left;
+    font-size: 14px;
+    padding: 0 8px;
+    color: #000;
+    &:hover{
+      color: darken(#fca22c, 10%);
+    }
+  }
+}
+.h-logo{
+  float: left;
+  a{
+    display: block;
+    background: url(http://china.cnr.cn/images/logo.jpg) no-repeat;
+    background-size: cover;
+    text-indent: -99999em;
+    width: 200px;
+    height: 50px;
+    margin: 5px 15px;
+  }
+}
+.head{
+  .container{
+    position: relative;
+  }
+}
+.h-search{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  @media (min-width: 768px) {
+    display: block;
+  }
+  @media (min-width: 992px) {
+    display: block;
+  }
+  @media (min-width: 1200px) {
+    display: block;
+  }
+  display: none;
+}
+.main{
+  overflow: hidden;
+  border-top: 1px solid #ededed;
+  padding-top: 20px;
+}
+.img-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+  .img-link{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    text-indent: 2em;
+    width: 100%;
+    background: rgba(0, 0, 0, .5);
+    font-weight: 600;
+    &:hover{
+      color: #fca22c;
+    }
+  }
+}
+.m-title{
+  position: relative;
+  margin-bottom: 20px;
+  height: 40px;
+  line-height: 40px;
+  @include border-bottom;
+  h2{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 1px;
+    width: 166px;
+    height: 100%;
+    line-height: 40px;
+    font-size: 22px;
+    font-weight: bold;
+    border-left: 4px solid $a-hover;
+    padding-left: 5px;
+    a{
+      display: block;
+      color: $a-hover;
+      &:hover{
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+  }
+}
+.media{
+  a{
+    h3{
+      font-size: 22px;
+      text-decoration: none;
+      padding-bottom: 5px;
+    }
+  }
+  line-height: 1.5;
+  font-size: 16px;
+  @include border-bottom;
+  padding-bottom: 15px;
+  margin: 15px 0;
+}
+.r-list{
+  overflow: hidden;
+  .m-title{
+    margin-bottom: 0px;;
+  }
+}
+.friend-links{
+  border-bottom: 1px solid #ededed;
+  background-color: $a-hover;
+  padding: 15px 0;
+  color: #fff;
+  dl{
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    dt{
+      display: inline-block;
+    }
+    dd{
+      display: inline-block;
+      padding: 0 10px;
+      a{
+        color: #fff;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+.footer{
+  border-top: 1px solid #dcdcdc;
+  background-color: #fafafa;
+  p{
+    color: $legal-color;
+    margin: 0;
+    padding: 5px 0 10px 0;
+  }
+}
+
+
+
+// list
+.article-list{
+  border-top: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+  overflow: hidden;
+}
+.list-item{
+  background-color: #fafafa;
+  position: relative;
+  border-top: 1px solid #f0f0f0;
+  padding: 20px 5px;
+  .text{
+    strong{
+      display: block;
+      margin-bottom: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 18px;
+    }
+    p{
+      margin: 0;
+      font-size: 16px;
+    }
+  }
+  &:first-child{
+    border-top: 0;
+  }
+}
+
+//page
+.recommend-zone{
+  margin: 30px 0;
+  .m-title{
+    margin-bottom: 0;
+  }
+  ul{
+    margin-bottom: 25px;
+    overflow: hidden;
+  }
+  .list-item {
+    background-color: transparent;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+.article{
+  .subject{
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 15px;
+    .source{
+      padding-top: 18px;
+      span{
+        padding-right: 10px;
+        font-size: 16px;
+        color: #666666
+      }
+    }
+  }
+  .articleMain{
+    .contentText{
+      font-size: 18px;
+      line-height: 36px;
+      text-align: justify;
+    }
+  }
+}
+
+.navbar{
+  background-color: $a-hover;
+  padding: 5px 0;
+  min-height: auto;
+  margin-bottom: 10px;
+  a{
+    display: inline-block;
+    color: #fff;
+    font-size: 16px;
+    padding: 0 15px;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}

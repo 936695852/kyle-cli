@@ -1,0 +1,10 @@
+@mixin border-bottom{
+  border-bottom: 1px solid #ededed;
+  &:last-child{
+    border-bottom: 0;
+  }
+}
+$a-hover: #02407B;
+$title-bg: lighten($a-hover,59%);
+$footer-bg: #fafafa;
+$legal-color: darken(#ccc, 20%);
