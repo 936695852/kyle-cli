@@ -413,7 +413,7 @@ gulp.task('server', function() {
             ], // 监听文件类型来自动刷新
             server: {
                 baseDir: config.rootBuild, // 目录位置
-                middleware: [proxy(proxyOptions)] // 代理设置
+   
             },
             ghostMode: { // 是否开启多端同步
                 click: true, // 同步点击
