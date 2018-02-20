@@ -28,6 +28,7 @@ var minimist      = require('minimist');
 var gulpSequence  = require('gulp-sequence'); // 顺序执行
 var eslint        = require('gulp-eslint'); // 代码风格检测工具
 var del           = require('del'); // 删除文件
+var sourcemaps    = require('gulp-sourcemaps') //生成sourcemap文件
 
   var spritesmith   = require('gulp.spritesmith'); // 生成雪碧图 https://github.com/twolfson/gulp.spritesmith
 
@@ -40,9 +41,6 @@ var url           = require('url');
 var proxy         = require('proxy-middleware');
 var browserSync   = require('browser-sync');
 var reload        = browserSync.reload;
-// 自动添加CDN地址
-var cdnizer = require("gulp-cdnizer");
-
 // 代理请求 / 端口设置 / 编译路径
 var config = require('./config.js');
 
@@ -174,38 +172,6 @@ var csssPrites = function() {
 }
 
 
-/**
- * CDN自动添加
- * 上线时使用
- *
- */
-gulp.task('cdn', function(){
-  return gulp
-      .src([config.dev.html, '!*.tpl'], { base: config.rootDev })
-      .pipe(cdnizer(
-        {
-          defaultCDNBase: "//my.cdn.host/base",
-          allowRev: true,
-          allowMin: true,
-          files: [
-            'assets/*/*css',
-            'assets/*/*js',
-            'assets/*/*.{gif,png,jpg,jpeg}',
-            {
-              file: 'assets/lib/bootstrap/dist/css/bootstrap.min.css',
-              package: "bootstrap",
-              cdn: '//cdn.bootcss.com/bootstrap/${ version }/css/${ filenameMin }'
-            },
-            {
-              file: 'assets/lib/jquery/dist/jquery.min.js',
-              package: "jquery",
-              cdn: '//cdn.bootcss.com/jquery/${ version }/${ filenameMin }'
-            }
-          ]
-        }))
-      .pipe(gulp.dest('src/'))
-})
-
 /* html 打包*/
 gulp.task('htmlmin', function() {
     var optionsSet = {
@@ -215,7 +181,7 @@ gulp.task('htmlmin', function() {
         removeEmptyAttributes: false, // 删除所有空格作属性值 <input id="" /> ==> <input />
         removeScriptTypeAttributes: false, // 删除<script>的type="text/javascript"
         removeStyleLinkTypeAttributes: false, // 删除<style>和<link>的type="text/css"
-        minifyJS: true, // 压缩页面JS
+        minifyJS: false, // 压缩页面JS
         minifyCSS: true // 压缩页面CSS
     };
 
@@ -249,10 +215,12 @@ gulp.task('cssmin', function() {
     return gulp
         .src(config.dev.css)
         .pipe(plumber(onError))
+        .pipe(sourcemaps.init())
         .pipe(sass())
         // .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer(AUTOPREFIXER_BROWSERS))
         .pipe(gulpif(options.env === 'production', minifycss()))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(config.build.css))
         .pipe(reload({ stream: true }));
 });
@@ -268,24 +236,11 @@ gulp.task('eslint', function() {
 })
 
 /* js 压缩 */
-gulp.task('jsmin', ['eslint'], function() {
+gulp.task('jsmin', /** ['eslint'],**/ function() {
     var jsmin = gulp
         .src([config.dev.js, '!node_modules/**'])
         .pipe(plumber(onError))
-        .pipe(babel({
-            presets: ['es2015'],
-            plugins: [
-                // es2015 - based off of v6.3.13
-                // https://github.com/babel/babel/tree/master/packages
-                require('babel-plugin-transform-es2015-object-super'),
-                require('babel-plugin-syntax-export-extensions'),
-                require('babel-plugin-transform-object-assign'),
-                require('babel-plugin-transform-es3-member-expression-literals'),
-                require('babel-plugin-transform-es3-property-literals'),
-                [require('babel-plugin-transform-es2015-classes'), { loose: true }],
-                [require('babel-plugin-transform-regenerator'), { async: false, asyncGenerators: false }],
-            ]
-        }))
+        .pipe(babel())
         // .pipe(webpack( webpackConfig ))
         .pipe(gulpif(options.env === 'production', uglify())) // 仅在生产环境时候进行压缩
         .pipe(gulp.dest(config.build.js))
@@ -313,7 +268,8 @@ gulp.task('webpack', function() {
         .pipe(gulp.dest(config.build.js));
 });
 
-/* images 压缩 */
+/* 
+s 压缩 */
 gulp.task('images', () => {
     return gulp
         .src(config.dev.image)

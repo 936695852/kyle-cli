@@ -1,0 +1,6 @@
+@mixin border-bottom{
+  border-bottom: 1px solid #ededed;
+  &:last-child{
+    border-bottom: 0;
+  }
+}

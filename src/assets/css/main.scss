@@ -1,3 +1,43 @@
 @import "../lib/initialize-css/dist/initialize.scss";
-@import "style/var.scss";
+@import "style/variabel.scss";
 
+@keyframes step {
+  80% {
+    transform: scale(1.0); 
+  }
+  100% {
+    transform: scale(0.8); 
+  }
+}
+
+
+h1{
+  font-size: 16px;
+}
+
+.yun-left{
+  animation: 2s cloud infinite; 
+  animation-timing-function: ease;
+}
+
+.yun-right{
+  animation: 2s cloudR infinite; 
+  animation-timing-function: ease;
+}
+
+@keyframes cloud {
+  50%{
+    transform: translateX(20%); 
+  }
+  100% {
+    transform: translateX(0); 
+  }
+}
+@keyframes cloudR {
+  50%{
+    transform: translateX(-20%); 
+  }
+  100% {
+    transform: translateX(0); 
+  }
+}
