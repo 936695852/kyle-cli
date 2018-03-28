@@ -21,7 +21,6 @@
   "dependencies": {
     "layer": "^3.1.1",
     "jquery": "^3.3.1",
-    "SuperSlide": "*",
     "normalize.css": "^8.0.0"
   }
 }
