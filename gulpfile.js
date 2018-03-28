@@ -211,7 +211,7 @@ gulp.task('cssmin', function() {
     return gulp
         .src(config.dev.css)
         .pipe(plumber(onError))
-        .pipe(sourcemaps.init())
+        .pipe(gulpif(options.env === 'development', sourcemaps.init()))
         .pipe(sass())
         // .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer(AUTOPREFIXER_BROWSERS))

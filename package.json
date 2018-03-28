@@ -52,6 +52,5 @@
     "proxy-middleware": "^0.15.0",
     "url": "^0.11.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
