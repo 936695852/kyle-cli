@@ -58,3 +58,5 @@ USER.MD
 
 vendor
 src/assets/lib
+
+src/assets/font/**/*

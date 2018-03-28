@@ -1,4 +1,3 @@
-
 function qs(expr, context) {
     return (context || document).querySelector(expr)
 }

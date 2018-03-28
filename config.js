@@ -29,6 +29,7 @@ module.exports = {
         scss : ROOT_DEV + '/assets/css/**/*.scss',
         js   : ROOT_DEV + '/assets/js/**/*.js',
         lib  : ROOT_DEV + '/assets/lib/**/*',
+        font  : ROOT_DEV + '/assets/font/**/*',
         image: [ROOT_DEV + '/assets/images/**/*.{png,jpg,gif,ico}', '!'+ ROOT_DEV + '/assets/images/sprite/**/'],
         tpl  : ROOT_DEV + '/**/*.tpl',
     },
@@ -39,6 +40,7 @@ module.exports = {
         css  : ROOT_BUILD + '/assets/css/',
         js   : ROOT_BUILD + '/assets/js/',
         lib  : ROOT_BUILD + '/assets/lib/',
+        font  : ROOT_BUILD + '/assets/font/',
         image: ROOT_BUILD + '/assets/images/',
         zip  : ROOT_BUILD + '/**/*'
     },

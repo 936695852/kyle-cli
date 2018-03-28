@@ -66,7 +66,7 @@ var cnEnvironment = function(cb) {
 
         // 执行项目打包
         gulpSequence([
-            'htmlmin', 'cssmin', 'images', 'jsmin', 'libmin'
+            'htmlmin', 'cssmin', 'images', 'jsmin', 'fontmin', 'libmin'
         ], function() {
 
             gutil.log(gutil.colors.green('Message：Compile finished!'));
@@ -245,7 +245,15 @@ gulp.task('libmin', function() {
         .pipe(reload({ stream: true }));
 });
 
-
+/* font 文件 */
+gulp.task('fontmin', function() {
+    // lib 插件
+    return gulp
+        .src(config.dev.font)
+        .pipe(plumber(onError))
+        .pipe(gulp.dest(config.build.font))
+        .pipe(reload({ stream: true }));
+});
 
 /* 
 s 压缩 */
@@ -324,6 +332,8 @@ gulp.task('watch', function() {
     gulp.watch(config.dev.js, ['jsmin'])
     // 看守所有js插件文件
     gulp.watch(config.dev.lib, ['libmin'])
+    // 看守所有font文件
+    gulp.watch(config.dev.lib, ['fontmin'])
     // 看守所有图片文件
     gulp.watch(config.dev.image, ['images'])
     // 看守所有雪碧图
