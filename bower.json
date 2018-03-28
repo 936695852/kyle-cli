@@ -1,0 +1,27 @@
+{
+  "name": "dev",
+  "description": "this is a gulp-demo",
+  "main": "index.js",
+  "authors": [
+    "kyle"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "gulp"
+  ],
+  "homepage": "https://github.com/936695852/my-gulp",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/assets/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "layer": "^3.1.1",
+    "jquery": "^3.3.1",
+    "SuperSlide": "*",
+    "normalize.css": "^8.0.0"
+  }
+}

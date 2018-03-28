@@ -26,15 +26,11 @@ var babel         = require('gulp-babel'); // 编译ES6
 var gulpif        = require('gulp-if'); // 条件判断
 var minimist      = require('minimist');
 var gulpSequence  = require('gulp-sequence'); // 顺序执行
-var eslint        = require('gulp-eslint'); // 代码风格检测工具
 var del           = require('del'); // 删除文件
 var sourcemaps    = require('gulp-sourcemaps') //生成sourcemap文件
 
   var spritesmith   = require('gulp.spritesmith'); // 生成雪碧图 https://github.com/twolfson/gulp.spritesmith
 
-// 结合webpack
-var webpack       = require('gulp-webpack');
-var webpackConfig = require('./webpack.config.js');
 
 // 静态服务器和代理请求
 var url           = require('url');
@@ -225,23 +221,13 @@ gulp.task('cssmin', function() {
         .pipe(reload({ stream: true }));
 });
 
-/* eslint 语法检查 */
-gulp.task('eslint', function() {
-   return gulp
-    .src([config.dev.js, '!node_modules/**'])
-    .pipe(plumber(onError))
-    .pipe(eslint({ configFle: './.eslintrc' }))
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-})
 
 /* js 压缩 */
-gulp.task('jsmin', /** ['eslint'],**/ function() {
+gulp.task('jsmin', function() {
     var jsmin = gulp
         .src([config.dev.js, '!node_modules/**'])
         .pipe(plumber(onError))
         .pipe(babel())
-        // .pipe(webpack( webpackConfig ))
         .pipe(gulpif(options.env === 'production', uglify())) // 仅在生产环境时候进行压缩
         .pipe(gulp.dest(config.build.js))
         .pipe(reload({ stream: true }));
@@ -259,14 +245,7 @@ gulp.task('libmin', function() {
         .pipe(reload({ stream: true }));
 });
 
-/* webpack */
-gulp.task('webpack', function() {
-    webpackConfig.refreshEntry();
-    return gulp
-        .src([config.dev.js])
-        .pipe(webpack(webpackConfig))
-        .pipe(gulp.dest(config.build.js));
-});
+
 
 /* 
 s 压缩 */
