@@ -262,7 +262,7 @@ gulp.task('images', () => {
         .src(config.dev.image)
         .pipe(plumber(onError))
         .pipe(cache(imagemin({
-            progressive: true,
+            progressive: false,
             svgoPlugins: [{
                 removeViewBox: false
             }],
